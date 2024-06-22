@@ -1,6 +1,7 @@
 import { getInputDirection } from "./input.js";
 
 const snakeBody = [{ x: 11, y: 11 }];
+let newSegments = 0;
 
 // control how fast the game actually updates (snake speed)
 export const SNAKE_MOVES_PER_SECOND = 5;
@@ -28,4 +29,21 @@ export function draw(gameBoard) {
 
 		gameBoard.appendChild(snakeElement);
 	});
+}
+
+export function expandSnake(amount) {
+	newSegments += amount;
+}
+
+
+export function isSnakeOnFood(foodPosition) {
+	// some function returns true if any segment returns true
+	return snakeBody.some( segment => {
+		return equalPositions(segment, foodPosition);
+	});
+}
+
+
+function equalPositions(pos1, pos2) {
+	return pos1.x === pos2.x && pos1.y === pos2.y;
 }
