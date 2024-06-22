@@ -2,8 +2,8 @@ import { getInputDirection } from "./input.js";
 
 const snakeBody = [{ x: 11, y: 11 }];
 
-// control how fast the game actually updates
-export const SNAKE_MOVES_PER_SECOND = 2;
+// control how fast the game actually updates (snake speed)
+export const SNAKE_MOVES_PER_SECOND = 5;
 
 export function update() {
 
