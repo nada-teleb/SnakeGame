@@ -8,6 +8,8 @@ export const SNAKE_MOVES_PER_SECOND = 5;
 
 export function update() {
 
+	addSegmentsToSnakesTail();
+
 	const inputDirection = getInputDirection();
 
 	// update each segment's position to be at the segment ahead of it
@@ -38,7 +40,7 @@ export function expandSnake(amount) {
 
 export function isSnakeOnFood(foodPosition) {
 	// some function returns true if any segment returns true
-	return snakeBody.some( segment => {
+	return snakeBody.some(segment => {
 		return equalPositions(segment, foodPosition);
 	});
 }
@@ -46,4 +48,12 @@ export function isSnakeOnFood(foodPosition) {
 
 function equalPositions(pos1, pos2) {
 	return pos1.x === pos2.x && pos1.y === pos2.y;
+}
+
+function addSegmentsToSnakesTail() {
+	for (let i = 0; i < newSegments; i++) 
+		// duplicate last segment in the snake to the end of the snake, the expansion will be only displayed after moving 
+		snakeBody.push({ ...snakeBody[snakeBody.length -1] });
+
+	newSegments = 0;
 }
