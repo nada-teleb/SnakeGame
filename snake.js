@@ -1,15 +1,13 @@
-const snakeBody = [
-	{ x: 10, y: 11 },
-	{ x: 11, y: 11 },
-	{ x: 12, y: 11 },
-	{ x: 13, y: 11 },
-	{ x: 14, y: 11 }
-];
+import { getInputDirection } from "./input.js";
+
+const snakeBody = [{ x: 11, y: 11 }];
 
 // control how fast the game actually updates
 export const SNAKE_MOVES_PER_SECOND = 2;
 
 export function update() {
+
+	const inputDirection = getInputDirection();
 
 	// update each segment's position to be at the segment ahead of it
 	for (let i = snakeBody.length - 2; i >= 0; i--) {
@@ -17,8 +15,8 @@ export function update() {
 	}
 
 	// lastly, update head position
-	snakeBody[0].x += 1;
-	snakeBody[0].y += 0;
+	snakeBody[0].x += inputDirection.x;
+	snakeBody[0].y += inputDirection.y;
 }
 
 export function draw(gameBoard) {
