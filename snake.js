@@ -38,11 +38,24 @@ export function expandSnake(amount) {
 }
 
 
-export function isSnakeOnFood(foodPosition) {
+export function isOnSnake(position, { ignoreHead = false } = {}) {
 	// some function returns true if any segment returns true
-	return snakeBody.some(segment => {
-		return equalPositions(segment, foodPosition);
+	return snakeBody.some((segment, currentIndex) => {
+		if (ignoreHead && currentIndex === 0)
+			return false;
+		return equalPositions(segment, position);
 	});
+}
+
+
+export function getSnakeHead() {
+	return snakeBody[0];
+}
+
+
+// check if the snake's head is touching any other snake body segments
+export function snakeIntersection() {
+	return isOnSnake(getSnakeHead(), { ignoreHead: true });
 }
 
 
@@ -51,9 +64,9 @@ function equalPositions(pos1, pos2) {
 }
 
 function addSegmentsToSnakesTail() {
-	for (let i = 0; i < newSegments; i++) 
+	for (let i = 0; i < newSegments; i++)
 		// duplicate last segment in the snake to the end of the snake, the expansion will be only displayed after moving 
-		snakeBody.push({ ...snakeBody[snakeBody.length -1] });
+		snakeBody.push({ ...snakeBody[snakeBody.length - 1] });
 
 	newSegments = 0;
 }

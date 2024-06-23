@@ -1,4 +1,4 @@
-import { isSnakeOnFood, expandSnake } from "./snake.js";
+import { isOnSnake, expandSnake } from "./snake.js";
 import { randomGridPosition } from "./grid.js"
 
 let food = getRandomFoodPosition();
@@ -8,7 +8,7 @@ const EXPANSION_RATE = 1;
 
 export function update() {
 	// check if snake is on top of the food -> can eat it
-	if (isSnakeOnFood(food)) {
+	if (isOnSnake(food)) {
 		expandSnake(EXPANSION_RATE);
 		food = getRandomFoodPosition();
 	}
@@ -27,7 +27,7 @@ export function draw(gameBoard) {
 function getRandomFoodPosition() {
 	let newFoodPosition;
 
-	while (newFoodPosition == null || isSnakeOnFood(newFoodPosition))
+	while (newFoodPosition == null || isOnSnake(newFoodPosition))
 		newFoodPosition = randomGridPosition();
 
 	return newFoodPosition;
