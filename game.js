@@ -9,7 +9,10 @@ let gameOver = false;
 function main(currentTime) {
 
 	if (gameOver) {
-		return alert('game over');
+		if (confirm('You lost. Press OK to restart the game.'))
+			// refresh page
+			window.location = '/';
+		return;
 	}
 
 	window.requestAnimationFrame(main);
